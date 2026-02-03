@@ -3,51 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SanDisk 1TB 團購</title>
+    <title>SanDisk 1TB 團購下單</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         function sendToLine(event) {
             event.preventDefault();
+            
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const store = document.getElementById('store').value;
             const lastFive = document.getElementById('lastFive').value;
 
-            const message = `【訂單：SanDisk 1TB】\n姓名：${name}\n電話：${phone}\n門市：${store}\n後五碼：${lastFive}\n總計：$4,060`;
-            const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
+            // 整理訂單文字
+            const message = `【新訂單：SanDisk 1TB】\n姓名：${name}\n電話：${phone}\n7-11門市：${store}\n匯款後五碼：${lastFive}\n總計：$4,060 (含運)`;
 
-            if(confirm("即將開啟 LINE 並自動填寫訂單，請在 LINE 按下「傳送」即可！")) {
-                window.location.href = lineUrl;
+            // 設定你的 LINE ID 連結
+            // 使用你的 ID: l270255
+            const lineUrl = `https://line.me/R/oaMessage/@l270255/?${encodeURIComponent(message)}`;
+            
+            // 備用連結 (如果上面那個沒反應，可以換成下面這個通用型)
+            const backupUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
+
+            if(confirm("即將開啟 LINE 並自動填寫訂單資料，請在 LINE 按下「傳送」即可完成下單！")) {
+                // 優先嘗試跳轉，若失敗則使用備用路徑
+                window.location.href = backupUrl;
             }
         }
     </script>
 </head>
-<body class="bg-gray-50 pb-20">
-    <div class="bg-red-600 text-white p-4 text-center font-bold shadow-md">SanDisk 1TB 專屬團購</div>
+<body class="bg-red-50 pb-20">
+    <div class="bg-red-600 text-white p-5 text-center shadow-lg font-black">
+        <h1 class="text-2xl tracking-widest">SanDisk 1TB 專屬團購</h1>
+    </div>
     
-    <div class="max-w-md mx-auto p-4">
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-100 text-center">
-            <img src="https://m.media-amazon.com/images/I/615pS24kS-L._AC_SL1500_.jpg" class="w-48 h-48 object-contain mx-auto mb-4">
-            <h2 class="text-xl font-bold text-gray-800">SanDisk Extreme PRO 1TB</h2>
-            <p class="text-gray-400 text-sm line-through">原價 $5,280</p>
-            <div class="mt-2 text-red-600">
-                <span class="text-sm font-bold">團購驚喜價</span>
-                <p class="text-4xl font-black">$4,000</p>
-                <p class="text-xs text-gray-500 mt-1">（運費：7-11 門市 +$60）</p>
+    <div class="max-w-md mx-auto p-4 space-y-6">
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden border-4 border-red-500">
+            <div class="p-6 text-center">
+                <img src="https://m.media-amazon.com/images/I/615pS24kS-L._AC_SL1500_.jpg" class="w-full h-56 object-contain mx-auto mb-4">
+                <h2 class="text-xl font-bold text-gray-800">SanDisk Extreme PRO 1TB</h2>
+                <div class="mt-4 bg-red-600 text-white p-4 rounded-2xl shadow-inner">
+                    <p class="text-sm font-bold opacity-90">限時下殺</p>
+                    <p class="text-5xl font-black my-1">$4,000</p>
+                    <p class="text-xs opacity-80 font-bold">運費：7-11 門市 +$60</p>
+                </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
-            <h3 class="font-bold text-center mb-6 text-gray-700">── 填寫資料並下單 ──</h3>
+        <div class="bg-white rounded-3xl shadow-lg p-6 border border-gray-100">
+            <h3 class="font-black text-lg text-center mb-6 text-red-600">── 填寫收件資訊 ──</h3>
             <form onsubmit="sendToLine(event)" class="space-y-4">
-                <input type="text" id="name" placeholder="收件人姓名" required class="w-full border-b-2 p-2 outline-none focus:border-red-500">
-                <input type="tel" id="phone" placeholder="手機號碼" required class="w-full border-b-2 p-2 outline-none focus:border-red-500">
-                <input type="text" id="store" placeholder="7-11 門市名稱" required class="w-full border-b-2 p-2 outline-none focus:border-red-500">
-                <input type="text" id="lastFive" placeholder="匯款後五碼" required class="w-full border-b-2 p-2 outline-none focus:border-red-500">
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 ml-1">收件人全名</label>
+                    <input type="text" id="name" required class="w-full border-b-2 border-gray-100 p-2 outline-none focus:border-red-500 text-lg">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 ml-1">手機電話</label>
+                    <input type="tel" id="phone" required class="w-full border-b-2 border-gray-100 p-2 outline-none focus:border-red-500 text-lg">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 ml-1">7-11 門市名稱</label>
+                    <input type="text" id="store" required class="w-full border-b-2 border-gray-100 p-2 outline-none focus:border-red-500 text-lg">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 ml-1">匯款帳號後五碼</label>
+                    <input type="text" id="lastFive" required class="w-full border-b-2 border-gray-100 p-2 outline-none focus:border-red-500 text-lg">
+                </div>
 
-                <button type="submit" class="w-full bg-[#06C755] text-white py-4 rounded-xl font-bold text-xl shadow-lg mt-6">
-                    確認資料，LINE 送出訂單
-                </button>
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-[#06C755] text-white py-5 rounded-2xl font-black text-xl shadow-xl active:scale-95 transition-all flex items-center justify-center">
+                        <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M24 10.3c0-4.7-4.7-8.5-10.5-8.5S3 5.6 3 10.3c0 4.2 3.7 7.7 8.8 8.4l-1.1 3.4c-.1.3 0 .6.3.8.1.1.2.1.3.1.2 0 .3-.1.4-.2l4.1-4.1c3.1-.9 5.2-3.4 5.2-6.4z"/></svg>
+                        確認資料，LINE 下單
+                    </button>
+                    <p class="text-center text-[10px] text-gray-400 mt-3 italic">點擊按鈕後將會開啟 LINE 聊天室</p>
+                </div>
             </form>
         </div>
     </div>
