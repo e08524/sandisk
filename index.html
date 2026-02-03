@@ -3,60 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SanDisk 1TB 團購下單</title>
+    <title>SanDisk 1TB 團購</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         function sendToLine(event) {
             event.preventDefault();
-            
-            // 抓取填寫的資料
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const store = document.getElementById('store').value;
             const lastFive = document.getElementById('lastFive').value;
 
-            // 組合成一段文字
-            const message = `你好，我要訂購 SanDisk 1TB\n姓名：${name}\n電話：${phone}\n門市：${store}\n後五碼：${lastFive}`;
-
-            // 這裡換成你的 LINE ID 連結，或是 LINE 官方帳號連結
-            // 如果你不知道連結，可以用 https://line.me/ti/p/你的ID
+            const message = `【訂單：SanDisk 1TB】\n姓名：${name}\n電話：${phone}\n門市：${store}\n後五碼：${lastFive}\n總計：$4,060`;
             const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
 
-            window.location.href = lineUrl;
+            if(confirm("即將開啟 LINE 並自動填寫訂單，請在 LINE 按下「傳送」即可！")) {
+                window.location.href = lineUrl;
+            }
         }
     </script>
 </head>
-<body class="bg-gray-100 pb-20">
-    <div class="bg-red-600 text-white p-4 text-center font-bold shadow-md italic">SanDisk Professional 團購</div>
+<body class="bg-gray-50 pb-20">
+    <div class="bg-red-600 text-white p-4 text-center font-bold shadow-md">SanDisk 1TB 專屬團購</div>
     
     <div class="max-w-md mx-auto p-4">
-        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
-            <h3 class="font-bold text-lg mb-4 text-center text-red-600 underline">請填寫下單資料</h3>
-            
-            <form onsubmit="sendToLine(event)" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">收件人姓名</label>
-                    <input type="text" id="name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-3 bg-gray-50 border">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">手機電話</label>
-                    <input type="tel" id="phone" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-3 bg-gray-50 border">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">7-11 門市名稱</label>
-                    <input type="text" id="store" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-3 bg-gray-50 border">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">匯款帳號後五碼</label>
-                    <input type="text" id="lastFive" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-3 bg-gray-50 border">
-                </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-100 text-center">
+            <img src="https://m.media-amazon.com/images/I/615pS24kS-L._AC_SL1500_.jpg" class="w-48 h-48 object-contain mx-auto mb-4">
+            <h2 class="text-xl font-bold text-gray-800">SanDisk Extreme PRO 1TB</h2>
+            <p class="text-gray-400 text-sm line-through">原價 $5,280</p>
+            <div class="mt-2 text-red-600">
+                <span class="text-sm font-bold">團購驚喜價</span>
+                <p class="text-4xl font-black">$4,000</p>
+                <p class="text-xs text-gray-500 mt-1">（運費：7-11 門市 +$60）</p>
+            </div>
+        </div>
 
-                <div class="pt-4">
-                    <button type="submit" class="w-full bg-[#00B900] text-white py-4 rounded-xl font-bold text-lg shadow-lg">
-                        透過 LINE 送出訂單
-                    </button>
-                </div>
-                <p class="text-center text-xs text-gray-400 mt-2">點擊後會自動開啟 LINE 傳送資料</p>
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+            <h3 class="font-bold text-center mb-6 text-gray-700">── 填寫資料並下單 ──</h3>
+            <form onsubmit="sendToLine(event)" class="space-y-4">
+                <input type="text" id="name" placeholder="收件人姓名" required class="w-full border-b-2 p-2 outline-none focus:border-red-500">
+                <input type="tel" id="phone" placeholder="手機號碼" required class="w-full border-b-2 p-2 outline-none focus:border-red-500">
+                <input type="text" id="store" placeholder="7-11 門市名稱" required class="w-full border-b-2 p-2 outline-none focus:border-red-500">
+                <input type="text" id="lastFive" placeholder="匯款後五碼" required class="w-full border-b-2 p-2 outline-none focus:border-red-500">
+
+                <button type="submit" class="w-full bg-[#06C755] text-white py-4 rounded-xl font-bold text-xl shadow-lg mt-6">
+                    確認資料，LINE 送出訂單
+                </button>
             </form>
         </div>
     </div>
