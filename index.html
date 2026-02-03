@@ -3,40 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SanDisk 1TB 團購</title>
+    <title>SanDisk 1TB 團購下單</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f9f9f9; }
-        .sandisk-red { background-color: #ed1c24; }
-    </style>
+    <script>
+        function sendToLine(event) {
+            event.preventDefault();
+            
+            // 抓取填寫的資料
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const store = document.getElementById('store').value;
+            const lastFive = document.getElementById('lastFive').value;
+
+            // 組合成一段文字
+            const message = `你好，我要訂購 SanDisk 1TB\n姓名：${name}\n電話：${phone}\n門市：${store}\n後五碼：${lastFive}`;
+
+            // 這裡換成你的 LINE ID 連結，或是 LINE 官方帳號連結
+            // 如果你不知道連結，可以用 https://line.me/ti/p/你的ID
+            const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(message)}`;
+
+            window.location.href = lineUrl;
+        }
+    </script>
 </head>
-<body class="pb-28">
-    <div class="sandisk-red text-white p-6 text-center shadow-lg font-black italic">SanDisk Professional</div>
+<body class="bg-gray-100 pb-20">
+    <div class="bg-red-600 text-white p-4 text-center font-bold shadow-md italic">SanDisk Professional 團購</div>
+    
     <div class="max-w-md mx-auto p-4">
-        <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
-            <div class="bg-white p-10"><img src="https://r2.erweicaihong.cn/v2-9d33292723024876b5c1c045b172a6b2.png" class="w-full h-auto object-contain mx-auto"></div>
-            <div class="px-6 pb-8 text-center">
-                <h2 class="text-2xl font-bold text-gray-800">SanDisk 1TB 隨身碟</h2>
-                <p class="text-gray-400 text-sm mb-4">正版公司貨 | 五年保固</p>
-                <div class="bg-red-50 rounded-2xl p-4 flex flex-col items-center border border-red-100">
-                    <span class="text-gray-400 line-through text-sm italic">原價 $5,280</span>
-                    <span class="text-3xl font-black text-red-600">優惠價 NT$ 4,000</span>
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
+            <h3 class="font-bold text-lg mb-4 text-center text-red-600 underline">請填寫下單資料</h3>
+            
+            <form onsubmit="sendToLine(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">收件人姓名</label>
+                    <input type="text" id="name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-3 bg-gray-50 border">
                 </div>
-            </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">手機電話</label>
+                    <input type="tel" id="phone" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-3 bg-gray-50 border">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">7-11 門市名稱</label>
+                    <input type="text" id="store" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-3 bg-gray-50 border">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">匯款帳號後五碼</label>
+                    <input type="text" id="lastFive" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-3 bg-gray-50 border">
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-[#00B900] text-white py-4 rounded-xl font-bold text-lg shadow-lg">
+                        透過 LINE 送出訂單
+                    </button>
+                </div>
+                <p class="text-center text-xs text-gray-400 mt-2">點擊後會自動開啟 LINE 傳送資料</p>
+            </form>
         </div>
-        <div class="mt-6 bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
-            <h3 class="font-bold text-gray-800 mb-2 text-center underline decoration-red-500">💰 匯款下單資訊</h3>
-            <div class="bg-gray-50 p-4 rounded-xl text-sm space-y-2">
-                <p>銀行代碼：822 (中國信託)</p>
-                <p>匯款帳號：<span class="text-red-600 font-bold">129541791348</span></p>
-                <p>運費：7-11 門市 + $60</p>
-            </div>
-            <p class="text-xs text-red-500 mt-4 font-bold text-center">匯款後請私訊：姓名、電話、7-11門市</p>
-        </div>
-    </div>
-    <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t p-4 flex justify-center z-50">
-        <button onclick="alert('請匯款至 822 - 129541791348\n總計 $4,060')" class="w-full max-w-md sandisk-red text-white py-4 rounded-2xl font-bold text-lg shadow-lg">立即下單 (總計 $4,060)</button>
     </div>
 </body>
 </html>
